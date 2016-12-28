@@ -12,7 +12,7 @@ export default class extends React.Component {
     this.generate = this.generate.bind(this)
     this.copy = this.copy.bind(this)
     this.keydown = this.keydown.bind(this)
-    this.state = { password: 'gTtlw084#h9(&^&f' }
+    this.state = { password: '' }
   }
 
   componentDidMount () {
@@ -33,10 +33,10 @@ export default class extends React.Component {
 
   copy () {
     copy(this.state.password)
-    this.passwordEl.style.webkitAnimationName = 'flash'
+    this.passwordEl.style.animationName = 'flash'
     setTimeout(() => {
       if (this.passwordEl) {
-        this.passwordEl.style.webkitAnimationName = ''
+        this.passwordEl.style.animationName = ''
       }
     }, 1000)
   }
@@ -44,9 +44,9 @@ export default class extends React.Component {
   keydown (ev) {
     if (ev.keyCode == 13) {
       this.copy()
-    }
-    if (ev.keyCode == 13 && ev.metaKey) {
-      window.close()
+      if (ev.metaKey) {
+        window.close()
+      }
     }
   }
 
