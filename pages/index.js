@@ -65,7 +65,7 @@ export default class extends React.Component {
             <input id='username' type='text' placeholder='username' autoCapitalize='none' autoFocus onKeyDown={this.keydown} onChange={this.generate} ref={(input) => { this.usernameInput = input }} />
             <input type='password' placeholder='master password' onKeyDown={this.keydown} onChange={this.generate} ref={(input) => { this.masterPasswordInput = input }} />
             <div className='password' ref={(el) => { this.passwordEl = el }}>
-              {password}
+              {this.masterPasswordInput && this.masterPasswordInput.value.length > 0 ? password : 'master password required'}
               <button onClick={this.copy}>copy</button>
             </div>
           </div>
