@@ -6,8 +6,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "next start",
-    "prepush": "npm test"
+    "start": "next start"
   },
   "author": "Vitaly Domnikov <dotcypress@gmail.com>",
   "license": "MIT",
@@ -15,8 +14,5 @@
     "blueimp-md5": "^2.6.0",
     "copy-to-clipboard": "^3.0.5",
     "next": "^2.0.0-beta.5"
-  },
-  "devDependencies": {
-    "husky": "^0.12.0"
   }
 }

@@ -94,7 +94,7 @@ export default class extends React.Component {
           .bookmarklet {
             display: inline-block;
             color: #ff5252;
-            font-size: 24px;
+            font-size: 20px;
             font-weight: bold;
             text-decoration: none;
             margin-bottom: 12px;
@@ -112,7 +112,7 @@ export default class extends React.Component {
             background: #263238;
             color: #2b98f0;
             font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
-            font-size: 22px;
+            font-size: 18px;
             width: 100%;
             padding: 6px 0;
             border: none;
@@ -132,18 +132,24 @@ export default class extends React.Component {
           }
 
           .password button {
+            cursor: pointer;
             font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
-            font-size: 13px;
+            font-size: 12px;
+            line-height: 20px;
             font-weight: bold;
-            color: #9ccc65;
+            color: #7e7b65;
             background: none;
             border: none;
             outline: none;
             position: absolute;
             right: 12px;
             top: 6px;
-            padding: 12px;
-            margin: -12px;
+            padding: 6px 12px;
+            margin: -6px -12px;
+          }
+
+          .password button:hover {
+            color: #fee94e;
           }
 
           @keyframes flash {
