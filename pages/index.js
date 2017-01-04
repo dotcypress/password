@@ -2,6 +2,7 @@ import React from 'react'
 import Head from 'next/head'
 import md5 from 'blueimp-md5'
 import copy from 'copy-to-clipboard'
+import pbkdf2 from 'pbkdf2-sha256'
 
 const bookmarklet = `javascript:window.open('https://password.now.sh/#' + new URL(document.location).host, '_blank');`
 const alphabetRFC1924 = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', '!', '#', '$', '%', '&', '(', ')', '*', '+', '-', ';', '<', '=', '>', '?', '@', '^', '_', '`', '{', '|', '}', '~']
@@ -26,8 +27,9 @@ export default class extends React.Component {
   }
 
   generate () {
-    const hash = [...md5(`${this.masterPasswordInput.value}${this.tldInput.value}${this.usernameInput.value}`, null, true)]
-    const password = hash.map((char) => alphabetRFC1924[char.charCodeAt(0) % alphabetRFC1924.length]).join('')
+    const masterPassword = this.masterPasswordInput.value
+    const salt = `${this.tldInput.value}${this.usernameInput.value}`
+    const password = Array.from(pbkdf2(masterPassword, salt, 1000, 32)).map((byte) => alphabetRFC1924[byte % alphabetRFC1924.length])
     this.setState({ password })
   }
 
@@ -124,6 +126,8 @@ export default class extends React.Component {
             color: #9ccc65;
             border: double 6px #9ccc65;
             border-radius: 0;
+            font-size: 14px;
+            line-height: 20px;
             padding: 6px;
             margin-top: 12px;
             animation-duration: 900ms;
