@@ -29,7 +29,7 @@ export default class extends React.Component {
   generate () {
     const masterPassword = this.masterPasswordInput.value
     const salt = `${this.tldInput.value}${this.usernameInput.value}`
-    const password = Array.from(pbkdf2(masterPassword, salt, 1000, 32)).map((byte) => alphabetRFC1924[byte % alphabetRFC1924.length])
+    const password = Array.from(pbkdf2(masterPassword, salt, 1000, 32)).map((byte) => alphabetRFC1924[byte % alphabetRFC1924.length]).join('')
     this.setState({ password })
   }
 
