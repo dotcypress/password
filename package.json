@@ -11,7 +11,6 @@
   "author": "Vitaly Domnikov <dotcypress@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "blueimp-md5": "^2.6.0",
     "copy-to-clipboard": "^3.0.5",
     "next": "^2.0.0-beta.5",
     "pbkdf2-sha256": "^1.1.1"

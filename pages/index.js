@@ -1,6 +1,5 @@
 import React from 'react'
 import Head from 'next/head'
-import md5 from 'blueimp-md5'
 import copy from 'copy-to-clipboard'
 import pbkdf2 from 'pbkdf2-sha256'
 
