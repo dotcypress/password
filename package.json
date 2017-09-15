@@ -1,6 +1,6 @@
 {
   "name": "password",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "One password, right way.",
   "scripts": {
@@ -12,8 +12,8 @@
   "license": "MIT",
   "dependencies": {
     "copy-to-clipboard": "^3.0.5",
-    "next": "^2.2.0",
-    "pbkdf2-sha256": "^1.1.1",
+    "next": "^3.2.2",
+    "pbkdf2": "^3.0.14",
     "react": "^15.5.4",
     "react-dom": "^15.5.4"
   }
