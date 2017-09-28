@@ -73,6 +73,12 @@ export default class extends React.Component {
         <Head>
           <title>~ psswrd</title>
           <meta name='viewport' content='initial-scale=1.0, maximum-scale=1, width=device-width' />
+          <link rel="apple-touch-icon" sizes='180x180' href='/static/apple-touch-icon.png' />
+          <link rel='icon' type='image/png' sizes='32x32' href='/static/favicon-32x32.png' />
+          <link rel='icon' type='image/png' sizes='16x16' href='/static/favicon-16x16.png' />
+          <link rel='manifest' href='/static/manifest.json' />
+          <link rel='mask-icon' href='/static/safari-pinned-tab.svg' color='#f9b05d' />
+          <meta name='theme-color' content='#ffffff' />
         </Head>
         <div className='app'>
           <a className='bookmarklet' href={bookmarklet} onClick={(e) => e.preventDefault()}>~ psswrd<sup>2.0</sup></a>
