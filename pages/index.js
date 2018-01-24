@@ -16,7 +16,7 @@ export default class extends React.Component {
     this.togglePasswordVisibility = this.togglePasswordVisibility.bind(this)
     this.state = { 
       password: '',
-      hint: '🐽 🦄 ☄️ 🍕',
+      hint: [417, 408, 729, 534],
       showPassword: false 
     }
   }
@@ -43,7 +43,7 @@ export default class extends React.Component {
     const keyIndex = parseInt(this.devivationInput.value) || 0
     const derived = pbkdf2.pbkdf2Sync(masterPassword, salt, 1000 + keyIndex, 16, 'sha256')
     const password = Array.from(derived).map((byte) => alphabetRFC1924[byte % alphabetRFC1924.length]).join('')
-    const hint =  new Array(4).fill('').map((value, index) => emojies[derived.readUInt32BE(index * 4) % emojies.length]).join(' ')
+    const hint =  new Array(4).fill('').map((value, index) => derived.readUInt32BE(index * 4) % emojies.length)
     this.setState({ password, hint })
   }
 
@@ -91,8 +91,15 @@ export default class extends React.Component {
                 <input type='number' min='0' placeholder='#' onKeyDown={this.keydown} onChange={this.generate} ref={(input) => { this.devivationInput = input }} />
               </div>
             </div>
-            <div className='password' ref={(el) => { this.passwordEl = el }}>
-              {showPassword ? password : hint}
+            <div className='result' ref={(el) => { this.passwordEl = el }}>
+              {showPassword && <div className='password'>{password}</div>}
+              {!showPassword && <div>
+                <div className='hint'>
+                  {hint.map((pos, idx) => <div key={idx} style={{ marginTop: -pos * 32 }}>
+                    {emojies.map((symbol) => <div key={`${idx}${symbol}`} className='emoji'>{symbol}</div>)}
+                  </div>)}                
+                </div>
+              </div>}
               <div className='actions'>
                 <button onClick={this.togglePasswordVisibility}>
                   {showPassword
@@ -162,18 +169,39 @@ export default class extends React.Component {
             text-shadow: 0px 0px 0px #000;
           }
 
-          .password {
+          .result {
             color: #99c794;
             border: double 6px #e77777;
             border-radius: 0;
             font-size: 18px;
             line-height: 20px;
-            padding: 6px;
             margin-top: 12px;
+            min-height: 42px;
             animation-duration: 700ms;
             animation-fill-mode: both;
             position: relative;
             text-align: center;
+          }
+
+          .result .password {
+            padding: 6px;
+          }
+
+          .result .hint {
+            display: flex;
+            overflow-x: hidden;
+            position: relative;
+            height: 32px;
+            justify-content: center;
+          }
+
+          .result .hint > div {
+            transition: margin-top 0.3s cubic-bezier(0,1,.95,.95);
+          }
+          
+          .result .hint .emoji {
+            height: 32px;
+            padding: 8px 4px;
           }
 
           .setup {
@@ -193,25 +221,25 @@ export default class extends React.Component {
             line-height: 20px;
           }
          
-          .password .actions {
+          .result .actions {
             position: absolute;
             right: 12px;
             top: 6px;
             margin: -6px -12px;
           }
 
-          .password .actions svg {
+          .result .actions svg {
             fill: #f9b05d;
             opacity: 0.7;
             margin-top: 2px;
           }
           
-          .password .actions button:hover svg {
+          .result .actions button:hover svg {
             fill: #e2ca46;
             opacity: 1;
           }
           
-          .password button {
+          .result button {
             cursor: pointer;
             font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
             background: none;
@@ -220,7 +248,7 @@ export default class extends React.Component {
             margin: 4px 0;
           }
 
-          .password button:hover {
+          .result button:hover {
             color: #e2ca46;
           }
 
