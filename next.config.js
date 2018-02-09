@@ -1,1 +1,2 @@
-module.exports.exportPathMap = () => ({ '/': { page: '/' }})
+const withOffline = require('next-offline')
+module.exports = withOffline()
