@@ -13,7 +13,7 @@
   "dependencies": {
     "copy-to-clipboard": "^3.0.5",
     "next": "^5.0.0",
-    "next-offline": "^0.1.0",
+    "next-offline": "^2.1.1",
     "pbkdf2": "^3.0.14",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
