@@ -16,7 +16,7 @@ export default class extends React.Component {
     this.togglePasswordVisibility = this.togglePasswordVisibility.bind(this)
     this.state = { 
       password: '',
-      hint: [417, 408, 729, 534],
+      hint: [],
       showPassword: false 
     }
   }
@@ -37,11 +37,10 @@ export default class extends React.Component {
   }
 
   generate () {
-    const { showPassword } = this.state
     const masterPassword = this.masterPasswordInput.value
     const salt = `${this.tldInput.value}${this.usernameInput.value}`
     const keyIndex = parseInt(this.devivationInput.value) || 0
-    const derived = pbkdf2.pbkdf2Sync(masterPassword, salt, 1000 + keyIndex, 16, 'sha256')
+    const derived = pbkdf2.pbkdf2Sync(masterPassword, salt, 10000 + keyIndex, 16, 'sha256')
     const password = Array.from(derived).map((byte) => alphabetRFC1924[byte % alphabetRFC1924.length]).join('')
     const hint =  new Array(4).fill('').map((value, index) => derived.readUInt32BE(index * 4) % emojies.length)
     this.setState({ password, hint })
@@ -77,11 +76,11 @@ export default class extends React.Component {
           <link rel='icon' type='image/png' sizes='32x32' href='/static/favicon-32x32.png' />
           <link rel='icon' type='image/png' sizes='16x16' href='/static/favicon-16x16.png' />
           <link rel='manifest' href='/static/manifest.json' />
-          <link rel='mask-icon' href='/static/safari-pinned-tab.svg' color='#f9b05d' />
+          <link rel='mask-icon' href='/static/safari-pinned-tab.svg' color='#ff38a0' />
           <meta name='theme-color' content='#ffffff' />
         </Head>
         <div className='app'>
-          <a className='bookmarklet' href={bookmarklet} onClick={(e) => e.preventDefault()}>~ psswrd<sup>2.0</sup></a>
+          <a className='bookmarklet' href={bookmarklet} onClick={(e) => e.preventDefault()}>~ psswrd<sup>3.0</sup></a>
           <div>
             <input id='tld' type='text' placeholder='tld' autoCapitalize='none' onKeyDown={this.keydown} onChange={this.generate} ref={(input) => { this.tldInput = input }} />
             <input id='username' type='text' placeholder='username' autoCapitalize='none' autoFocus onKeyDown={this.keydown} onChange={this.generate} ref={(input) => { this.usernameInput = input }} />
@@ -122,7 +121,7 @@ export default class extends React.Component {
           }
 
           html {
-            background: #2e353e;
+            background: #2d333a;
           }
 
           body {
@@ -131,12 +130,12 @@ export default class extends React.Component {
           }
 
           .app {
-            padding: 6px 12px;
+            padding: 2px 8px;
           }
 
           .bookmarklet {
             display: inline-block;
-            color: #f9b05d;
+            color: #e871e8aa;
             font-size: 20px;
             font-weight: bold;
             text-decoration: none;
@@ -145,7 +144,7 @@ export default class extends React.Component {
 
           .bookmarklet sup {
             padding: 4px;
-            color: #e2ca46;
+            color: #ff38a0;
             font-size: 10px;
           }
 
@@ -159,7 +158,7 @@ export default class extends React.Component {
 
           input {
             background: none;
-            color: #57a1c7;
+            color: #e2ca46;
             font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono, Bitstream Vera Sans Mono, Courier New, monospace, serif;
             font-size: 18px;
             width: 100%;
@@ -170,8 +169,8 @@ export default class extends React.Component {
           }
 
           .result {
-            color: #99c794;
-            border: double 6px #e77777;
+            color: #ff38a0;
+            border: double 5px #e871e844;
             border-radius: 0;
             font-size: 18px;
             line-height: 20px;
@@ -229,13 +228,13 @@ export default class extends React.Component {
           }
 
           .result .actions svg {
-            fill: #f9b05d;
+            fill: #e871e8;
             opacity: 0.7;
             margin-top: 2px;
           }
           
           .result .actions button:hover svg {
-            fill: #e2ca46;
+            fill: #ff38a0;
             opacity: 1;
           }
           

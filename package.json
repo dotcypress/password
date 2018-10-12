@@ -1,19 +1,18 @@
 {
   "name": "password",
-  "version": "0.2.0",
+  "version": "3.0.0",
   "private": true,
   "description": "One password, right way.",
   "scripts": {
-    "dev": "node server.js",
+    "dev": "next",
     "build": "next build",
-    "start": "NODE_ENV=production node server.js"
+    "start": "NODE_ENV=production next start"
   },
   "author": "Vitaly Domnikov <dotcypress@gmail.com>",
   "license": "MIT",
   "dependencies": {
     "copy-to-clipboard": "^3.0.5",
-    "next": "^5.0.0",
-    "next-offline": "^2.1.1",
+    "next": "^7.0.0",
     "pbkdf2": "^3.0.14",
     "react": "^16.0.0",
     "react-dom": "^16.0.0"
