@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "next",
     "build": "next build",
-    "start": "NODE_ENV=production next start"
+    "start": "NODE_ENV=production next start -p 7000"
   },
   "author": "Vitaly Domnikov <dotcypress@gmail.com>",
   "license": "MIT",
